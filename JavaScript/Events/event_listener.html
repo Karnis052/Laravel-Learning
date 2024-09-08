@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Inline Listener</title>
+    <style>
+        #box {
+            width: 200px;
+            height: 200px;
+            background: blue;
+        }
+    </style>
+</head>
+<body>
+  
+    <div id="msg">Click Me</div>
+    <script>
+        const eventDiv = document.getElementById('msg');
+         
+        function handleClick(e)
+        {
+            alert("Hello, user");
+        }
+        eventDiv.addEventListener("click", handleClick)
+    </script>
+</body>
+</html>
