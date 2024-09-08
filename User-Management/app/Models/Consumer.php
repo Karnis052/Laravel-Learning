@@ -13,7 +13,7 @@ class Consumer extends Authenticatable
 
     public $timestamps = false;
 
-    protected $fillable = ['username', 'name', 'email', 'password'];
+    protected $fillable = ['username', 'name', 'email', 'password', 'department_id'];
 
     /**
      * The attributes that should be hidden for serialization.
@@ -34,4 +34,8 @@ class Consumer extends Authenticatable
         'email_verified_at' => 'datetime',
         'password' => 'hashed',
     ];
+    public function department()
+    {
+        return $this->belongsTo(Department::class, 'id', 'department_id');
+    }
 }

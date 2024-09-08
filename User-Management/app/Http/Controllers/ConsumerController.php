@@ -44,7 +44,8 @@ class ConsumerController extends Controller
                 'username' => 'required|string|max:255|unique:consumers,username',
                 'password' => 'required|string|min:4',
                 'name' => 'required|string|max:255',
-                'email' => 'required|email|max:255|unique:consumers,email'
+                'email' => 'required|email|max:255|unique:consumers,email',
+                'department_id' => 'sometimes'
             ]);
 
             $user = Consumer::create([
@@ -52,6 +53,7 @@ class ConsumerController extends Controller
                 'password' => bcrypt($validatedData['password']),
                 'name' => $validatedData['name'],
                 'email' => $validatedData['email'],
+                'department_id' => $validatedData['department_id'],
             ]);
             return response()->json([
                 'message' => 'User created successfully',

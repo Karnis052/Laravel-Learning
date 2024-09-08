@@ -66,6 +66,25 @@
         >
         <p v-if="errors.password" class="text-red-500 text-xs italic">{{ errors.password[0] }}</p>
       </div>
+
+      <div class="mb-4">
+        <label class="block text-gray-700 text-sm font-bold mb-2" for="department">
+            Department
+        </label>
+        <select
+            v-model="form.department_id" 
+            class="shadow appearance-none border rounded w-full px-2 py-2 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline"
+            :class="{ 'border-red-500': errors.department_id }"
+            id ='department'
+        >
+            <option value="">Select a Department</option>
+            <option v-for="dept in departments" :key="dept.id" :value="dept.id">
+              {{ dept.name }}
+            </option>
+
+        </select>
+
+      </div>
       
       <div class="flex items-center justify-between">
         <button 
@@ -80,7 +99,7 @@
 </template>
 
 <script setup>
-import { ref, reactive } from 'vue';
+import { ref, reactive, onMounted } from 'vue';
 import axios from 'axios';
 import { useRouter } from 'vue-router';
 
@@ -91,10 +110,22 @@ const form = reactive({
   name: '',
   email: '',
   password: '',
+  department_id: '',
 });
 
 const errors = reactive({});
 const errorMessage = ref('');
+const departments = ref([])
+
+onMounted(async() => {
+  try{
+    const response = await axios.get('http://127.0.0.1:8000/api/departments/')
+    departments.value = response.data;
+  }catch(error){
+    errorMessage.value = 'Failed to load departments. Please try again later.';
+  }
+
+});
 
 const handleRegistration = async () => {
   try {

@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\ConsumerController;
+use App\Http\Controllers\DepartmentController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\LoginController;
@@ -27,4 +28,7 @@ Route::post("/login/", [LoginController::class, "login"])->name("login");
 Route::post("/logout/", [LoginController::class, "logout"])->name("logout");
 
 Route::post("/searchByName/", [SearchController::class, 'searchByName'])->name('searchByName');
+
+Route::get('/departments/', [DepartmentController::class, 'index'])->name('department.index');
+Route::post('/departments/', [DepartmentController::class,'store'])->name('department.store');
 
