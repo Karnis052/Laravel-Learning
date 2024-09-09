@@ -10,13 +10,15 @@ class SearchController extends Controller
 {
     public function searchByName(Request $request)
     {
+       
         try{
             $validatedData = $request->validate([
                 'name' => 'required|string|min:2',
             ]);
             $users = Consumer::where('name', 'like', '%' . $validatedData['name'] . '%')
+                    ->with('department:id,name')
                     ->limit(10)
-                    ->get(['username', 'name', 'email']);
+                    ->get(['id', 'username', 'name', 'email', 'department_id']);
 
             return response()->json([
                 'data' => $users,
@@ -35,3 +37,42 @@ class SearchController extends Controller
         }
     }
 }
+
+
+// public function searchByName(Request $request)
+// {
+//     try {
+//         $validatedData = $request->validate([
+//             'name' => 'required|string|min:2',
+//         ]);
+
+//         $users = Consumer::where('name', 'like', '%' . $validatedData['name'] . '%')
+//             ->with('department:id,name') // Eager load the department
+//             ->limit(10)
+//             ->get(['id', 'username', 'name', 'email', 'department_id']);
+
+//         $formattedUsers = $users->map(function ($user) {
+//             return [
+//                 'id' => $user->id,
+//                 'username' => $user->username,
+//                 'name' => $user->name,
+//                 'email' => $user->email,
+//                 'department' => $user->department ? $user->department->name : 'No Department'
+//             ];
+//         });
+
+//         return response()->json([
+//             'data' => $formattedUsers,
+//             'count' => $users->count(),
+//         ], 200);
+//     } catch (ValidationException $e) {
+//         return response()->json([
+//             'error' => 'Validation failed',
+//             'messages' => $e->errors()
+//         ], 422);
+//     } catch (\Exception $e) {
+//         return response()->json([
+//             'error' => 'An error occurred while searching for users',
+//         ], 500);
+//     }
+// }

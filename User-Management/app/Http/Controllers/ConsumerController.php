@@ -12,7 +12,9 @@ class ConsumerController extends Controller
     public function index()
     {
         try {
-            $users = Consumer::get();
+            $users = Consumer::with('department:id,name')
+            ->select('id', 'username', 'name', 'email', 'department_id')
+            ->get();
             return response()->json($users, 200);
         } catch (\Exception $e) {
             Log::error('Error fetching users: ' . $e->getMessage());
