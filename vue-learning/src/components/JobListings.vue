@@ -7,7 +7,7 @@
                 </h2>
                 <!-- Spinner -->
                  <div v-if="state.isLoading" class="text-center text-gray-600 py-6">
-                    PulseLoader
+                    <PulseLoader/>
                 </div>
                 <div v-else class="grid grid-cols-1 md:grid-cols-3 gap-6">
                     <JobListing v-for="job in state.jobs.slice(0, limit || state.jobs.length)" :key="job.id" :job="job"> 
