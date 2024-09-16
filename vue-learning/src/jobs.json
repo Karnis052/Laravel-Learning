@@ -97,6 +97,20 @@
         "contactEmail": "karnis052@gmail.com",
         "contactPhone": "01834802860"
       }
+    },
+    {
+      "title": "Software Engineer",
+      "type": "Full-Time",
+      "location": "Dhaka",
+      "description": "Rest API, Data Structure, Laravel, Vue js 3, Algorithm",
+      "salary": "$80K - $90K",
+      "company": {
+        "name": "Nirj",
+        "description": "Leading Software Company",
+        "contactEmail": "karnis052@gmail.com",
+        "contactPhone": "01834802860"
+      },
+      "id": "6176"
     }
   ]
 }
